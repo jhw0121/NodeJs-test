@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include ("./head.ejs") %>
+</head>
+<body>
+    <%- include ("./nav.ejs") %>
+    <div class="container">
+        <h2 class="title">사용자 정보</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">age</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var person of persons) { %>
+                <tr>
+                    <th scope="row"><%= person.id %></th>
+                    <td><%= person.email %></td>
+                    <td><%= person.password %></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

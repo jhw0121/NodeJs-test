@@ -1,0 +1,13 @@
+extends layout
+
+block head
+    title 홈 화면
+
+block content
+    h1 홈
+    #username
+        if username
+            p 환영합니다 #{username} !!!
+    button(onclick="location.href='/login'") 로그인
+
+    
