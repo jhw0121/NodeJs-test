@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include ("./head.ejs") %>
+</head>
+<body>
+    <%- include ("./nav.ejs") %>
+    <div class="container">
+        <h2>게시판</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">조회수</th>
+                    <th scope="col">좋아요</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col">수정/삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% posts.forEach(function(post, index) { %>
+                <tr>
+                    <th scope="row"><%= index+1 %></th>
+                    <td>
+                        <a href="/post/<%= post.post_id %>">
+                            <%= post.title %>
+                            <% if (post.comment_count > 0) { %>
+                                (<%= post.comment_count %>)
+                            <% } %>
+                        </a>
+                    </td>
+                    <td><%= post.view_count %></td>
+                    <td><% if (post.user_id !== user.id) { %>
+                        <a href="/post/like/<%= post.post_id %>"><i class="far fa-heart"></i></a>
+                    <% } else { %>  <i class="far fa-heart"></i>
+                    <% } %>
+                    <%= post.likes %>
+                    </td>
+                    <td><%= post.email %></td>
+                    <td>
+                        <% if (post.user_id == user.id) { %>
+                        <a href="/post/edit/<%= post.post_id %>">
+                            <i class="far fa-edit"></i></a>
+                        <a href="/post/delete/<%= post.post_id %>">
+                            <i class="far fa-trash-alt"></i></a>
+                        <% } %>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <a href="/posts/create">
+        <button type="button" class="btn btn-primary">+ New</button></a>
+    </div>
+</body>
+</html>
